@@ -1,5 +1,4 @@
-# SINC-method
-[FT and FFT] Option pricing with the SINC approach: experiments under the rough Heston model
+# SINC-method: rough Heston model
 
 The repository contains everything you need for pricing European options and their digital components with the SINC approach. 
 Matlab script 'main.m' performs the pricing exercise with both the FT and the FFT versions of the method in the rough Heston model 
