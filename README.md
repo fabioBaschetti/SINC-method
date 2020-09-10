@@ -6,9 +6,11 @@ Matlab script 'main.m' performs the pricing exercise with both the FT and the FF
 - SINC_discFT to price one single strike with full precision (this is actually vectorized and allows dealing with multiple strikes at 
   the same time)
 - SINC_fastFT to price one entire smile by exploiting the computational power of the FFT algorithm.
+
 On the other hand, 'cmp.m' compares two different strategies for FT pricing that correspond to functions
 - SINC_discFT    : uses N evaluations of the characteristic function, always
 - SINC_discFT_sbs: uses as many evaluations of the CF as they are needed to reach satisfactory accuracy (and up to N).
+
 This impacts on CPU time. You can change N in the script and study their behavior.
 Both the FT and the FFT versions of the SINC approach require the PDF of the asset log-return is truncated. Function 'truncMeasures.m' 
 serves this purpose. The truncation rule depends on the cumulants and a multiplier L which we set at 100 to ensure maximum precision. 
