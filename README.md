@@ -1,26 +1,12 @@
-# SINC method: rough Heston model
+# SINC method [source code from - The SINC way: A fast and accurate approach to Fuorier pricing]
 
-The repository contains everything you need for pricing European options and their digital components with the SINC approach. 
-Matlab script 'main.m' performs the pricing exercise with both the FT and the FFT versions of the method in the rough Heston model 
-(forward variance specification). It therefore uses functions
-- SINC_discFT to price one single strike with full precision (this is actually vectorized and allows dealing with multiple strikes at 
-  the same time)
-- SINC_fastFT to price one entire smile by exploiting the computational power of the FFT algorithm.
+The repository contains everything you need for pricing European options and their digital components with the SINC approach and other standard Fuorier methods from the literature: Carr-Madan (1999), Lewis (2000) and Fang-Oosterlee (2008). FT\FFT\frFFT versions are implemented for all those methods - when they exist - and a number of tests carried out to assess the relative performance of the SINC as opposed to its standard competitors. GBM, Heston, CGMY and the rough Heston model (forward variance form) are employed for such purposes.
 
-On the other hand, 'cmp.m' compares two different strategies for FT pricing that correspond to functions
-- SINC_discFT    : uses N evaluations of the characteristic function, always
-- SINC_discFT_sbs: uses as many evaluations of the CF as they are needed to reach satisfactory accuracy (and up to N).
+Matlab functions SINC_discFT\SINC_fastFT\SINC_fracFT are commented in full detail so that the user can easily jump from the code to the text, and viceversa. Similarly, the scripts refer to the figures and tables in the paper that they reproduce:
+- main_convMODEL.m studies the convergence of the FT version of both SINC and COS to the 'true' option price under MODEL. When MODEL=rHeston this should be read with main_convrHeston_fig.m, where a pictorial representation for the convergence of the methods is given
+- main_drawPDF.m   plots the densities in the text (for CGMY and rHeston) {other models can be easily implemented} (this uses function chf2pdf to reconstruct the pdf from the characteristic function via the FFT) 
+- main_FFTdate.m   prices an entire volatility surface with the FFT\frFFT versions of SINC\Carr-Madan\Lewis
 
-This impacts on CPU time. You can change N in the script and study their behavior.
+We also upload the surfaces we use and .txt files where every maturity is given the corresponding value of Xc for determining the truncation range.
 
-Both the FT and the FFT versions of the SINC approach require the PDF of the asset log-return is truncated. Function 'truncMeasures.m' 
-serves this purpose. The truncation rule depends on the cumulants and a multiplier L which we set at 100 to ensure maximum precision. 
-You can also change it if you are happy with lower accuracy. Reducing the multiplier clearly boosts convergence (i.e. you will 
-typically need much smaller N).
-
-The experiments are under the rough Heston model. 'dh_pade33_coeff.m', 'dh_pade33.m' and 'phirHeston.m' are needed to compute its 
-characteristic function.
-
-You can obviously change the call to the rough Heston CF with any other model the characteristic function of which is formally known, 
-and use SINC formulas with those models as well. Recall that they require a factor 2*\pi to be included in the definition of the CF 
-for a martingale.
+The content of any other function\script should be clear from the title when following the logic described above.
