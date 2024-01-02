@@ -1,4 +1,4 @@
-# SINC method [source code from - The SINC way: A fast and accurate approach to Fuorier pricing]
+# SINC method [source code from - The SINC way: A fast and accurate approach to Fourier pricing]
 
 The repository contains everything you need for pricing European options and their digital components with the SINC approach and other standard Fuorier methods from the literature: Carr-Madan (1999), Lewis (2000) and Fang-Oosterlee (2008). FT\FFT\frFFT versions are implemented for all those methods - when they exist - and a number of tests carried out to assess the relative performance of the SINC as opposed to its standard competitors. GBM, Heston, CGMY and the rough Heston model (forward variance form) are employed for such purposes.
 
